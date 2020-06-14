@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% load i18n %}
+{% load static %}
+{% load account socialaccount %}
+{% load crispy_forms_tags %}
+{% load widget_tweaks %}
+{% block head_title %}{% trans "Sign In" %}{% endblock %}
+
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'fonts/font-awesome-4.7.0/css/font-awesome.min.css' %}">  
+    <link rel="stylesheet" href="{% static 'css/login-form.css' %}"> 
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+
+{% endblock %}
+{% block content %}
+<div class="limiter">
+    <div class="container-login">
+        <div class="wrap-login">
+            <div class="login-pic">
+                <img src="{% static 'img/undraw_Hello_qnas.svg' %}">
+            </div>
+            <form class="login-form" method="POST" action="{% url 'account_login' %}">
+                {% csrf_token %}
+                {% get_providers as socialaccount_providers %}
+
+                {% include "socialaccount/snippets/login_extra.html" %}
+            
+                <span class="login-form-title"> Login </span>
+                <div class="wrap-input">
+
+                    <p>{{ form.login.errors }}</p>
+                    <div class="control-group">            
+                        <div class="controls">
+                            {{ form.login|attr:"class:input"|attr:"name:login"|attr:"autofocus:autofocus" }} 
+                        </div>
+                    </div>                      
+
+                    
+                    <div class="control-group">
+                        <p>{{ form.password.errors }}</p>
+                        <div class="controls">
+                            {{ form.password|attr:"class:input"}}
+                        </div>
+                    </div>
+                    <br>
+                    <div class="control-group">
+                        <div class="controls">
+                            {{form.remember|attr:"name:remember"|attr:"class:checkboxinput"}} <label for="remember">Remember me</label>
+                        </div>
+                    </div>
+                    
+                    {% if redirect_field_value %}
+                        <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
+                    {% endif %}
+                </div>
+                <div class="form-btn2">
+                    
+                    <label for="reset_password"><a class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></label>       
+                    <button> Login</button>
+                </div>
+                
+                <p class="login-or">{% trans 'or' %}</p>
+                {% get_providers as socialaccount_providers %}
+                <div class="border-bottom socialaccount_ballot">
+                    <ul class="social-icon-one socialaccount_providers">
+                        <li class="twitter"><a href="{% provider_login_url 'twitter' %}"><span class="fa fa-twitter"></span></a></li>
+                        <!-- google and facebook -->
+                    </ul>
+                    
+                </div>
+            </form>
+
+
+        </div>
+    </div>
+</div> 
+{% endblock %}

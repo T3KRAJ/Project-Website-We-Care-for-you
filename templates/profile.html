@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+
+    <div class="row py-5 px-9">
+        <div class="col-xl-8 col-md-8 col-sm-10 mx-auto">
+            <div class="bg-white shadow rounded overflow-hidden">
+                <div class="px-4 pt-0 pb-4 bg-dark">
+                    <div class="media align-items-end profile-header">
+                        <div class="profile mr-3"><img src="{{ profile.image.url }}" alt="profile pic" width="130" class="rounded mb-2 img-thumbnail">
+                            {% if profile.user == request.user %} 
+                                <a href="{% url 'updateprofile' %}" class="btn btn-dark btn-sm btn-block">Edit profile</a>
+                            {% endif %}
+                        </div>
+                        <div class="media-body mb-5 text-white">
+                            <h4 class="mt-0 mb-0">{{user.username}}</h4>
+                            <p class="small mb-4"> <i class="fa fa-envelope" aria-hidden="true"></i>  {{user.email}}</p>
+                        </div>
+                        
+                    </div>
+                </div>
+
+                <div class="bg-light p-4 d-flex justify-content-end text-center">
+                    <ul class="list-inline mb-0">
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{profile.get_num_of_blogs}} </h5><small class="text-muted"> <i class="fa fa-picture-o mr-1"></i>Blogs</small>
+                        </li>
+                        <li class="list-inline-item">
+                            <h5 class="font-weight-bold mb-0 d-block">{{profile.get_num_of_confessions}}</h5><small class="text-muted"> <i class="fa fa-user-circle-o mr-1"></i>Confessions</small>
+                        </li>
+                    </ul>
+                </div>
+                <h5 class="px-4">Bio</h5>
+                <p class="small px-5">{{profile.bio}}</p>
+
+                <div class="px-4">
+                    <div class="py-4">
+                        <h5 class="mb-3">Recent posts</h5>
+                        {% for post in posts %}
+                        <div class="p-4 bg-light rounded shadow-sm">
+                            <h4>{{post.title}}</h4>
+                            <p class="small mb-2">{{post.get_date}}</p>
+                            <p class="font-italic mb-0">{{post.content|slice:":200" }}</p>
+                            <a href="{% url 'blog:post-detail' post.slug  %}">Continue reading &rarr;</a>
+                            <ul class="list-inline small text-muted mt-3 mb-0">
+                                <li class="list-inline-item">#{{post.get_category_display}}</li> 
+                                <li class="list-inline-item"><i class="fa fa-heart-o mr-2"></i>{{post.total_likes}}Like{{post.total_likes|pluralize}}</li>
+                            </ul>
+                        </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div><!-- End profile widget -->
+
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,22 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="jumbotron p-4 p-md-5 mt-4 text-white rounded bg-dark">
+            <form method="POST">
+                {% csrf_token %}
+                <h2>Delete Post</h2>
+                <br>
+                <h5 class="ml-4">Are you sure you want to delete the post "{{ object.title }}"?</h5>
+                <br>
+                <div>
+                    <button class="btn btn-danger" type="submit">Yes, Delete</button>
+                    <a class="btn btn-primary" href="{% url 'blog:post-detail' object.slug %}" >Cancel </a>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}

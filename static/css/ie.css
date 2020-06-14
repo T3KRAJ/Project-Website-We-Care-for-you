@@ -1,0 +1,60 @@
+@charset "utf-8";
+
+body {
+	background: #F4F4F4;
+}
+
+#welcome {
+	height: 90px;
+	width: 600px;
+	padding-left: 60px;
+	color: #000;
+	margin-top: 28px;
+	position: relative;
+	font-size: 11px;
+	float: right;
+}
+
+#userpic {
+	width: 75px;
+	height: 75px;
+	margin-left: 20px;
+	margin-right: 10px;
+	margin-top: 15px;
+	float: left;
+	position: absolute;
+}
+
+/* Search */ 
+
+form.search {
+	margin-right: 0px;
+}
+
+form.search input.textbox {
+	margin: 0;
+	padding: 25px 2px;
+	padding-left: 30px;
+	width: 160px;
+	background: none;
+	border: none;
+	color: #fff;
+}
+
+form.search input.button {
+	background : url(search-button.png) no-repeat;
+	color: #333;
+	border: none;
+	width: 25px;
+	height: 20px;
+	cursor: pointer;
+	margin-left: 15px;
+}
+
+#content-wrap-top {
+	background: url(nav.png) center no-repeat;
+	height: 63px;
+	position: relative;
+}
+
+	

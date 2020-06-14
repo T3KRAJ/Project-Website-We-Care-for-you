@@ -1,0 +1,40 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% load widget_tweaks %}
+
+    {% block content %}
+    <div class="container mt-3 mb-3">
+        <h1 style="color: rgb(232, 248, 3);">Submit your confession</h1>
+        <hr>
+        <div class="card">
+            <div class="cardbody m-4 p-2">
+                <form id="post_form" method="POST" action="" enctype="multipart/form-data">
+                    {% csrf_token %}       
+                    <div class="form-group">
+                        <label for="category">Category</label>
+                        {{ form.category|attr:"class:form-control"|attr:"type:select"|attr:"name:category"|attr:"readonly"}}
+                    </div> 
+                    <div class="form-group">
+                        <label for="Title">Title</label>
+                        {{ form.title|attr:"class:form-control"|attr:"type:text"}}
+                    </div> 
+                    
+                    <div class="form-group">
+                        <label for="description">Content</label>
+                        {{ form.content|attr:"class:form-control"|attr:"type:text"}}
+                    </div>     
+                    <div class="form-group">
+                        <label for="exampleInputdisplayname">Display name</label>
+                        {{form.display_name|attr:"class:form-control"|attr:"type:text"}}
+                        <small id="emailHelp" class="form-text text-muted">You can reveal your real name or use any fake name.</small>
+                      </div>   
+                    <input type="submit" name="submit" value="Submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+
+    {% endblock %}

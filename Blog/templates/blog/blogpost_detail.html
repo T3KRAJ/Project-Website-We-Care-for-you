@@ -1,0 +1,61 @@
+{% load humanize %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <div>
+        <h4>{{blogpost.title}}</h4>
+        <p>{{blogpost.content}}</p>
+        <p>{{blogpost.get_date}}</p>
+    </div>
+    <form action="{% url 'blog:like-post' %}" method="POST">
+        {% csrf_token %}
+        {% if is_liked %}
+            <button type="submit" name="blogpost_id" value="{{ blogpost.id }}">Dislike</button>
+        {% else %}
+            <button type="submit" name="blogpost_id" value="{{ blogpost.id }}">Like</button>
+        {% endif %}
+    </form>
+    <p>{{ blogpost.total_likes }} Like{{ blogpost.total_likes|pluralize }} </p>
+    <hr>
+    {% if request.user == blogpost.author %}
+        <a href="{% url 'blog:post-update' blogpost.slug %}">Edit</a>
+        <a href="{% url 'blog:post-delete' blogpost.slug %}">Delete</a>
+    {% endif %}
+    <hr>
+    <!-- Comments Form --> 
+    <h2>Add a new comment</h2>
+    <form action="." method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Add comment</button>
+    </form>
+
+    {% for comment in comments %}
+        <div>
+            <p>USER: {{ comment.name }} | {{ comment.get_date }}</p>
+                {{ comment.body|linebreaks }}
+
+            {% for reply in comment.replies.all %}
+                <p>USER: {{ reply.name }} | {{ reply.get_date }}</p>
+                <li>{{ reply.body }}</li>
+            {% endfor %}
+
+            <h5>Reply</h5>
+            <form action="." method="post">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <!-- Hidden input for parent comment.id -->
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <input class="btn btn-primary" type="submit" value="Reply">
+            </form>
+        </div>
+    {% empty %}
+    <h4>There are no comments yet.</h4>
+    {% endfor %}
+</body>
+</html>    

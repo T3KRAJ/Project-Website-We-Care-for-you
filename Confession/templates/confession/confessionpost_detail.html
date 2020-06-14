@@ -1,0 +1,76 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+    <div class="container">
+        <div class="jumbotron  mt-4">
+            <div class="container">
+                <div class="category">
+                    <button type="button float-left" class="btn btn-info">{{confessionpost.get_category_display}}</button>
+                    <div class="dropdown show float-right">
+                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fa fa-bars" aria-hidden="true"></i>
+                        </a>                      
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                            {% if request.user == confessionpost.author %}
+                            <a class="dropdown-item" href="{% url 'confession:post-update' confessionpost.slug %}">Edit</a>
+                            <a class="dropdown-item" href="{% url 'confession:post-delete' confessionpost.slug %}">Delete</a>
+                            {% endif %}
+                            <a class="dropdown-item" href="#">Report</a>
+                        </div>
+                    </div>                    
+                    <div><small>{{confessionpost.get_date}}</small></div>
+                    {% if confessionpost.display_name %}
+                        &nbsp &nbsp <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                    </svg> {{confessionpost.display_name}}
+                    {% endif %}
+      
+                  </div> 
+                <h2 class="display-4 font-italic">{{confessionpost.title}}</h2>
+                <p class="lead my-3 mr-3 ml-3">&nbsp;&nbsp;{{confessionpost.content}}</p>
+                <hr>
+                <form action="{% url 'confession:like-post' %}" method="POST">
+                    {% csrf_token %}
+                    {% if is_liked %}
+                        <button type="submit" class="btn btn-sm btn-danger pl-2" name="confessionpost_id" value="{{ confessionpost.id }}">Unlike</button>
+                    {% else %}
+                        <button type="submit" class="btn btn-sm btn-primary pl-3 pr-3" name="confessionpost_id" value="{{ confessionpost.id }}">Like</button>
+                    {% endif %}
+                </form>
+                <p>{{ confessionpost.total_likes }} Like{{confessionpost.total_likes|pluralize }} </p>
+            </div>
+        </div>
+    </div>
+    <!-- Comments Form 
+    <h2>Add a new comment</h2>
+    <form action="." method="post">
+        {{ comment_form.as_p }}
+        {% csrf_token %}
+        <button type="submit">Add comment</button>
+    </form>
+
+    {% for comment in comments %}
+        <div>
+            <p> USER: {{ comment.name }} | {{ comment.created }}</p>
+                {{ comment.body|linebreaks }}
+
+            {% for reply in comment.replies.all %}
+                <p>USER: {{ reply.name }} | {{ reply.created }}</p>
+                <li>{{ reply.body }}</li>
+            {% endfor %}
+
+            <h5>Replyy</h5>
+            <form action="." method="post">
+                {{ comment_form.as_p }}
+                {% csrf_token %}
+                <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                <input class="btn btn-primary" type="submit" value="Reply">
+            </form>
+        </div>
+    {% empty %}
+    <h4>There are no comments yet.</h4>
+    {% endfor %} -->
+{% endblock %}   
