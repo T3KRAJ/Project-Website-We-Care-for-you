@@ -20,13 +20,24 @@
             <div class="login-pic">
                 <img src="{% static 'img/undraw_Hello_qnas.svg' %}">
             </div>
+            <p class="lead">Please! <a href="{% url 'account_signup' %}">create an account </a>first if you don't have.</p> 
             <form class="login-form" method="POST" action="{% url 'account_login' %}">
                 {% csrf_token %}
                 {% get_providers as socialaccount_providers %}
 
-                {% include "socialaccount/snippets/login_extra.html" %}
-            
+                {% include "socialaccount/snippets/login_extra.html" %}                
                 <span class="login-form-title"> Login </span>
+                {% if form.errors %}
+                    {% for field in form %}
+                        {% for error in field.errors %}
+                            <small style="color: red;">{{error}}</small><br>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in form.non_field_errors %}
+                        <small style="color: red;">{{error}}</small>     <br>    
+                    {% endfor %}
+                    <br>
+                {% endif %}
                 <div class="wrap-input">
 
                     <p>{{ form.login.errors }}</p>
@@ -54,13 +65,14 @@
                         <input type="hidden" name="{{ redirect_field_name }}" value="{{ redirect_field_value }}" />
                     {% endif %}
                 </div>
-                <div class="form-btn2">
-                    
-                    <label for="reset_password"><a class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></label>       
-                    <button> Login</button>
+                <div class="form-btn2">                   
+                    <a href="{% url 'account_login' %}"><button>Login</button> </a>
+
+                    <label for="reset_password"><a style="color: blue;" class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></label>       
                 </div>
-                
-                <p class="login-or">{% trans 'or' %}</p>
+
+                <br>
+                <center class="login-or">{% trans 'or' %}</center>
                 {% get_providers as socialaccount_providers %}
                 <div class="border-bottom socialaccount_ballot">
                     <ul class="social-icon-one socialaccount_providers">
@@ -70,8 +82,6 @@
                     
                 </div>
             </form>
-
-
         </div>
     </div>
 </div> 

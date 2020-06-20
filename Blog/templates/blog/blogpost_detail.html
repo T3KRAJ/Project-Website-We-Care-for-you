@@ -1,33 +1,102 @@
-{% load humanize %}
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>
-        <h4>{{blogpost.title}}</h4>
-        <p>{{blogpost.content}}</p>
-        <p>{{blogpost.get_date}}</p>
-    </div>
-    <form action="{% url 'blog:like-post' %}" method="POST">
-        {% csrf_token %}
-        {% if is_liked %}
-            <button type="submit" name="blogpost_id" value="{{ blogpost.id }}">Dislike</button>
-        {% else %}
-            <button type="submit" name="blogpost_id" value="{{ blogpost.id }}">Like</button>
-        {% endif %}
-    </form>
-    <p>{{ blogpost.total_likes }} Like{{ blogpost.total_likes|pluralize }} </p>
-    <hr>
-    {% if request.user == blogpost.author %}
-        <a href="{% url 'blog:post-update' blogpost.slug %}">Edit</a>
-        <a href="{% url 'blog:post-delete' blogpost.slug %}">Delete</a>
-    {% endif %}
-    <hr>
-    <!-- Comments Form --> 
+
+    {% extends 'base.html' %}
+    {% load static %}
+    {% block extra_head %}
+        <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    {% endblock %}
+    {% block content %}
+        <div class="container">
+            <div class="jumbotron  mt-4">
+                <div class="container">
+                    <div class="category">
+                        <button type="button float-left" class="btn btn-info">{{blogpost.get_category_display}}</button>
+                        <div class="dropdown show float-right">
+                            <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-bars" aria-hidden="true"></i>
+                            </a>                      
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                {% if request.user == blogpost.author %}
+                                <a class="dropdown-item" href="{% url 'blog:post-update' blogpost.slug %}">Edit</a>
+                                <a class="dropdown-item" href="{% url 'blog:post-delete' blogpost.slug %}">Delete</a>
+                                {% endif %}
+                                <a class="dropdown-item" href="#">Report</a>
+                            </div>
+                        </div>                    
+                        <div><small>{{blogpost.get_date}}</small></div>
+                            &nbsp &nbsp
+                        <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg> {{blogpost.author.username}}
+                      
+          
+                      </div> 
+                    <h2 class="display-4 font-italic">{{blogpost.title}}</h2>
+                    <p class="lead my-3 mr-3 ml-3">&nbsp;&nbsp;{{blogpost.content}}</p>
+                    <hr>
+                    <form action="{% url 'blog:like-post' %}" method="POST">
+                        {% csrf_token %}
+                        {% if is_liked %}
+                            <button type="submit" class="btn btn-sm btn-danger pl-2" name="blogpost_id" value="{{ blogpost.id }}">Unlike</button>
+                        {% else %}
+                            <button type="submit" class="btn btn-sm btn-primary pl-3 pr-3" name="blogpost_id" value="{{ blogpost.id }}">Like</button>
+                        {% endif %}
+                    </form>
+                    <p>{{ blogpost.total_likes }} Like{{blogpost.total_likes|pluralize }} </p>
+                </div>
+            </div>
+        </div>
+    
+
+    <!-- Comments  -->
+    
+
+
+
+        <div class="container">
+            <div class="row">
+            {% for comment in comments %}
+            <div class="col-md-8 bg-light">
+                <h2 class="page-header">Comments</h2>
+                <section class="comment-list">
+                    <article class="row">
+                    <div class="col-md-2 col-sm-2 hidden-xs">
+                        <figure class="thumbnail">
+                            <img class="img-responsive" src="{{ comment.name.profile.image.url}}"/>
+                            <figcaption class="text-center">{{comment.name}}</figcaption>
+                        </figure>
+                    </div>
+                    <div class="col-md-10 col-sm-10">
+                        <div class="panel panel-default arrow left">
+                        <div class="panel-body">
+                            <header class="text-left">
+                            <div class="comment-user"><i class="fa fa-user"></i> {{comment.name}}</div>
+                            <time class="comment-date" datetime="{{comment.created}}"><i class="fa fa-clock-o"></i> {{ comment.get_date }}</time>
+                            </header>
+                            <div class="comment-post">
+                            <p>
+                                {{comment.body}}
+                            </p>
+                            </div>
+                            {% for reply in comment.replies.all %}
+                                <p>USER: {{ reply.name }} | {{ reply.get_date }}</p>
+                                <li>{{ reply.body }}</li>
+                            {% endfor %}
+                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+            </div>
+            {% empty %}
+            <h4>There are no comments yet.</h4>
+            {% endfor %}
+            </div>
+        </div>
+        
+
+
+    
     <h2>Add a new comment</h2>
     <form action="." method="post">
         {{ comment_form.as_p }}
@@ -57,5 +126,8 @@
     {% empty %}
     <h4>There are no comments yet.</h4>
     {% endfor %}
-</body>
-</html>    
+        {% block extra_script %}
+            <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+            <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+        {% endblock %}
+    {% endblock %}   

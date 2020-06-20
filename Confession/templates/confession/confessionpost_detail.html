@@ -44,33 +44,4 @@
             </div>
         </div>
     </div>
-    <!-- Comments Form 
-    <h2>Add a new comment</h2>
-    <form action="." method="post">
-        {{ comment_form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Add comment</button>
-    </form>
-
-    {% for comment in comments %}
-        <div>
-            <p> USER: {{ comment.name }} | {{ comment.created }}</p>
-                {{ comment.body|linebreaks }}
-
-            {% for reply in comment.replies.all %}
-                <p>USER: {{ reply.name }} | {{ reply.created }}</p>
-                <li>{{ reply.body }}</li>
-            {% endfor %}
-
-            <h5>Replyy</h5>
-            <form action="." method="post">
-                {{ comment_form.as_p }}
-                {% csrf_token %}
-                <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                <input class="btn btn-primary" type="submit" value="Reply">
-            </form>
-        </div>
-    {% empty %}
-    <h4>There are no comments yet.</h4>
-    {% endfor %} -->
 {% endblock %}   

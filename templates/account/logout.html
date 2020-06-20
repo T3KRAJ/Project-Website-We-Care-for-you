@@ -1,11 +1,15 @@
-{% extends "account/base.html" %}
+{% extends 'base.html' %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
 {% load i18n %}
 
 {% block head_title %}{% trans "Sign Out" %}{% endblock %}
 
 {% block content %}
-  <main>
-    <div class="container">
+  <div class="container">
+    <div class="jumbotron p-4 p-md-5 mt-4 text-white rounded bg-dark">
       <section class="mb-4">
         <div class="row wow fadeIn">
           <div class='col-6 offset-3'>
@@ -22,5 +26,6 @@
         </div>
       </section>
     </div>
-  </main>
+  </div>
+
 {% endblock %}
