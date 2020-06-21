@@ -5,7 +5,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from django.views.generic import ListView, DetailView, DeleteView
 from core.models import Profile
-from Blog.models import BlogPost, Images
+from Blog.models import BlogPost
 from django.contrib.auth.models import User
 
 def home(request):
@@ -16,12 +16,10 @@ def profileView(request, username):
     user = get_object_or_404(User, username=username)
     profile = Profile.objects.get(user=user)
     posts = BlogPost.objects.filter(author=user)
-    # post_images = Images.objects.filter(post=posts[0])  #Incomplete (rendering of images in blogpost)
     context = {
         'user':user,
         'profile':profile,
         'posts':posts,
-        # 'post_images':post_images,
     }
     return render(request, 'profile.html', context)
 

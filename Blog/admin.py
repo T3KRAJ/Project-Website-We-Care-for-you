@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Blog.models import BlogPost, Images, Comment
+from Blog.models import BlogPost, Comment
 
 class BlogPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status','created_on')
@@ -9,7 +9,6 @@ class BlogPostAdmin(admin.ModelAdmin):
 
   
 admin.site.register(BlogPost, BlogPostAdmin)
-admin.site.register(Images)
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):

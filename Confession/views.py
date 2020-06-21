@@ -1,6 +1,5 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
-from Confession.models import ConfessionPost, Comment
-from Confession.forms import CommentForm
+from Confession.models import ConfessionPost
 from django.contrib import messages
 from core.models import Profile
 from django.utils import timezone
@@ -34,37 +33,11 @@ def confessionpost_detail(request, slug):
     is_liked = False
     if post.likes.filter(id=request.user.id).exists():
         is_liked = True
-    if request.method == 'POST':
-        comment_form = CommentForm(request.POST)
-        if comment_form.is_valid():
-            parent_obj = None
-
-            try:
-                parent_id = int(request.POST.get('parent_id'))
-            except:
-                parent_id = None
-
-
-            if parent_id:
-                parent_obj = Comment.objects.get(id=parent_id)
-                if parent_obj:
-                    replay_comment = comment_form.save(commit=False)
-                    replay_comment_name = request.user
-                    replay_comment.parent = parent_obj
-            new_comment = comment_form.save(commit=False)            
-            new_comment.post = post
-            new_comment.name = request.user
-            
-            new_comment.save()
-            return redirect(post.get_absolute_url())
-    else:
-        comment_form = CommentForm()
     return render(request,
                   'confession/confessionpost_detail.html',
                   {'confessionpost' : post,
-                   'comments' : comments,
                    'is_liked' : is_liked,
-                   'comment_form' : comment_form})
+                   })
 
 class CPUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = ConfessionPost

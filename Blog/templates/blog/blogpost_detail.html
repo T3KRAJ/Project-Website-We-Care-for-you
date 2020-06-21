@@ -1,9 +1,14 @@
 
     {% extends 'base.html' %}
     {% load static %}
+    {% load widget_tweaks %}
     {% block extra_head %}
         <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
-        <link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+        <style>
+            .commentform{
+                box-sizing: 20px
+            }
+        </style>
     {% endblock %}
     {% block content %}
         <div class="container">
@@ -11,6 +16,9 @@
                 <div class="container">
                     <div class="category">
                         <button type="button float-left" class="btn btn-info">{{blogpost.get_category_display}}</button>
+                        <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                        </svg> <a href="{% url 'profile' blogpost.author.username %}">{{blogpost.author.username}}</a>
                         <div class="dropdown show float-right">
                             <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bars" aria-hidden="true"></i>
@@ -20,18 +28,16 @@
                                 <a class="dropdown-item" href="{% url 'blog:post-update' blogpost.slug %}">Edit</a>
                                 <a class="dropdown-item" href="{% url 'blog:post-delete' blogpost.slug %}">Delete</a>
                                 {% endif %}
-                                <a class="dropdown-item" href="#">Report</a>
                             </div>
                         </div>                    
-                        <div><small>{{blogpost.get_date}}</small></div>
-                            &nbsp &nbsp
-                        <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
-                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
-                        </svg> {{blogpost.author.username}}
-                      
-          
-                      </div> 
+                        <div><small>{{blogpost.get_date}}</small></div>                    
+                    </div> 
                     <h2 class="display-4 font-italic">{{blogpost.title}}</h2>
+                    <hr>
+                    {% if blogpost.image %}
+                        <img class="img-responsive thumbnail mt-3 mb-3" src="{{ blogpost.image.url }}" alt="image" style="width: 50%; height: 50%;">
+                        <hr>
+                    {% endif %}
                     <p class="lead my-3 mr-3 ml-3">&nbsp;&nbsp;{{blogpost.content}}</p>
                     <hr>
                     <form action="{% url 'blog:like-post' %}" method="POST">
@@ -49,83 +55,50 @@
     
 
     <!-- Comments  -->
-    
+       
+    <div class="container">
+        <div class="card bg-dark text-white  mt-2 mb-2 p-3">
+            <div class="cardbody">
+                {% for comment in comments %}
+                    <div>
+                        <p>
+                            <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg> {{ comment.name }} &nbsp; &nbsp;{{ comment.get_date }} &nbsp; &nbsp;  {{ comment.body|linebreaks }}
+                        </p>
+                        {% for reply in comment.replies.all %}
+                            <p><svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              </svg>{{ reply.name }} &nbsp;&nbsp; {{ reply.get_date }}</p>
+                            <li>{{ reply.body }}</li>
+                        {% endfor %}
 
+                        <form action="." method="POST">        
+                            {% csrf_token %}
+                            {{ comment_form.body }}  
+                            <input class="btn btn-primary" type="submit" value="Reply">
 
-
-        <div class="container">
-            <div class="row">
-            {% for comment in comments %}
-            <div class="col-md-8 bg-light">
-                <h2 class="page-header">Comments</h2>
-                <section class="comment-list">
-                    <article class="row">
-                    <div class="col-md-2 col-sm-2 hidden-xs">
-                        <figure class="thumbnail">
-                            <img class="img-responsive" src="{{ comment.name.profile.image.url}}"/>
-                            <figcaption class="text-center">{{comment.name}}</figcaption>
-                        </figure>
+                            <!-- Hidden input for parent comment.id -->
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        </form>
+                        <hr>
                     </div>
-                    <div class="col-md-10 col-sm-10">
-                        <div class="panel panel-default arrow left">
-                        <div class="panel-body">
-                            <header class="text-left">
-                            <div class="comment-user"><i class="fa fa-user"></i> {{comment.name}}</div>
-                            <time class="comment-date" datetime="{{comment.created}}"><i class="fa fa-clock-o"></i> {{ comment.get_date }}</time>
-                            </header>
-                            <div class="comment-post">
-                            <p>
-                                {{comment.body}}
-                            </p>
-                            </div>
-                            {% for reply in comment.replies.all %}
-                                <p>USER: {{ reply.name }} | {{ reply.get_date }}</p>
-                                <li>{{ reply.body }}</li>
-                            {% endfor %}
-                            <p class="text-right"><a href="#" class="btn btn-default btn-sm"><i class="fa fa-reply"></i> reply</a></p>
-                            </div>
-                        </div>
-                    </div>
-                </section>
-            </div>
-            {% empty %}
-            <h4>There are no comments yet.</h4>
-            {% endfor %}
+                {% empty %}
+                <p>There are no comments yet.</p>
+                {% endfor %}
+                <p class="lead">Add a new comment</p>
+                <form action="" method="POST"> 
+                    {% csrf_token %}
+                        {{ comment_form.body|attr:"class:form-control commentform"|attr:"placeholder:New comment..." }}
+                     <div class="form-group">
+                   </div> 
+                    
+                    <button class="btn btn-primary" type="submit">Add comment</button>
+                </form>
             </div>
         </div>
-        
+    </div>
 
-
-    
-    <h2>Add a new comment</h2>
-    <form action="." method="post">
-        {{ comment_form.as_p }}
-        {% csrf_token %}
-        <button type="submit">Add comment</button>
-    </form>
-
-    {% for comment in comments %}
-        <div>
-            <p>USER: {{ comment.name }} | {{ comment.get_date }}</p>
-                {{ comment.body|linebreaks }}
-
-            {% for reply in comment.replies.all %}
-                <p>USER: {{ reply.name }} | {{ reply.get_date }}</p>
-                <li>{{ reply.body }}</li>
-            {% endfor %}
-
-            <h5>Reply</h5>
-            <form action="." method="post">
-                {{ comment_form.as_p }}
-                {% csrf_token %}
-                <!-- Hidden input for parent comment.id -->
-                <input type="hidden" name="parent_id" value="{{ comment.id }}">
-                <input class="btn btn-primary" type="submit" value="Reply">
-            </form>
-        </div>
-    {% empty %}
-    <h4>There are no comments yet.</h4>
-    {% endfor %}
         {% block extra_script %}
             <script src="//netdna.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
             <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>

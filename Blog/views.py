@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404, reverse
 from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView
-from Blog.models import BlogPost, Images, Comment
-from Blog.forms import PostForm, ImageForm, CommentForm
+from Blog.models import BlogPost, Comment
+from Blog.forms import PostForm, CommentForm
 from django.forms import modelformset_factory
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
@@ -12,30 +12,20 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 class BlogPostList(ListView):
     queryset = BlogPost.objects.filter(status=1).order_by('-created_on')
     template_name = 'blog/blogs.html'  
-    # incomplete (rendering of images in blogpost)
-    paginate_by = 10
+    paginate_by = 5
 
 
 
 def createBlogPost(request):
 
-    ImageFormSet = modelformset_factory(Images, form = ImageForm, extra=3)
-
     if request.method == 'POST':      
-        formset = ImageFormSet(request.POST, request.FILES, queryset=Images.objects.none())
         postForm = PostForm(request.POST)
 
-        if postForm.is_valid() and formset.is_valid():
+        if postForm.is_valid():
             post_form = postForm.save(commit=False)
             post_form.author = request.user
             post_form.status = 1
-            post_form.save()
-
-            for form in formset.cleaned_data:
-                image = form['image']
-                photo = Images(post=post_form, image=image)
-                photo.save()
-            
+            post_form.save()         
             messages.success(request,
                              "Posted!")
             return redirect("blog:posts")
@@ -43,9 +33,8 @@ def createBlogPost(request):
             messages.error(request, "Some errors occured")
     else:
         postForm = PostForm()
-        formset = ImageFormSet(queryset=Images.objects.none())
-    return render(request, 'blog/create_blog_post.html',
-                  {'postform': postForm, 'formset': formset})
+    return render(request, 'blog/blogpost_form.html',
+                  {'form': postForm})
 
 
 @login_required
@@ -89,7 +78,7 @@ def blogpost_detail(request, slug):
 
 class BPUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BlogPost
-    fields = ['title', 'content']
+    fields = ['title', 'content', 'category', 'image']
     success_url = ""
 
     def form_valid(self, form):
@@ -124,3 +113,21 @@ def like_blogpost(request):
         is_liked = True
     return redirect(post.get_absolute_url())
         
+class SearchResultsView(ListView):
+    model = BlogPost
+    template_name = 'blog/search_results.html'
+
+    def get_queryset(self): # new
+        query = self.request.GET.get('q' or None)
+        object_list = BlogPost.objects.filter(title__icontains=query)
+    
+        return object_list
+
+class SearchByCategory(ListView):
+    model = BlogPost
+    template_name = 'blog/search_results.html'
+
+    def get_queryset(self): 
+        query = self.request.GET.get('q')
+        object_list = BlogPost.objects.filter(category = query)
+        return object_list

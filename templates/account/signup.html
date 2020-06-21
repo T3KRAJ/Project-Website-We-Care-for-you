@@ -8,10 +8,8 @@
   <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 {% endblock %}
 {% block content %}
-  <div class="container">
-
-    
-    <div class="card m-5 p-5 shadow p-3 mb-5 bg-white rounded">
+  <div class="container"> 
+    <div class="card m-5 p-5 shadow p-3 mb-5 text-white rounded bg-dark">
       <h5 class="card-header">{% trans "Sign Up" %}</h5>
       <div class="cardbody m-2 p-2">
         <h5 class="card-title">{% blocktrans %}Already have an account? Then please <a href="{{ login_url }}">sign in</a>.{% endblocktrans %}</h5>

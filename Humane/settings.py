@@ -25,11 +25,8 @@ INSTALLED_APPS = [
 
     'core.apps.CoreConfig',
     'Blog.apps.BlogConfig',
-    'chatapp.apps.ChatappConfig',
     'Confession.apps.ConfessionConfig',
 
-    'rest_framework',
-    'channels',
     'widget_tweaks',
 
     'crispy_forms',
@@ -37,8 +34,6 @@ INSTALLED_APPS = [
     'allauth',
     'allauth.account',
     'allauth.socialaccount',
-    'allauth.socialaccount.providers.google',
-    'allauth.socialaccount.providers.twitter',
 
 ]
 
@@ -114,24 +109,8 @@ USE_L10N = True
 
 USE_TZ = True
 
-REST_FRAMEWORK = {
-    'DEFAULT_PERMISSION_CLASSES': [
-        'rest_framework.permissions.IsAuthenticated'
-    ],
-    'DEFAULT_PAGINATION_CLASS':
-        'rest_framework.pagination.LimitOffsetPagination',
-    'PAGE_SIZE': 100
-}
 
-MESSAGES_TO_LOAD = 15
 
-# In settings.py
-CHANNEL_LAYERS = {
-    "default": {
-        "BACKEND": "asgiref.inmemory.ChannelLayer",
-        "ROUTING": "Humane.routing.channel_routing",
-    },
-}
 
 # Static files (CSS, JavaScript, Images)
 ADMIN_MEDIA_PREFIX = '/static/admin/'
@@ -169,17 +148,3 @@ ACCOUNT_LOGIN_ATTEMPTS_TIMEOUT = 86400
 # EMAIL_CONFIRMATION_SIGNUP = True
 LOGIN_REDIRECT_URL = 'home'
 EMAIL_BACKEND='django.core.mail.backends.console.EmailBackend'
-
-
-
-
-
-ASGI_APPLICATION = 'Humane.routing.application'
-CHANNEL_LAYERS = {
-    'default': {
-        'BACKEND': 'channels_redis.core.RedisChannelLayer',
-        'CONFIG': {
-            "hosts": [('127.0.0.1', 6379)],
-        },
-    },
-}

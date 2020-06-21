@@ -6,61 +6,32 @@
 {% endblock %}
 {% block content %}
   <div class="container">
-    <a href="{% url 'blog:create-post' %}"><button class="btn btn-lg btn-success mt-3">Create Blog</button></a>
+    <h3 text-white bg-dark text-center>Search Results</h3>
     <div class="row">
       <div class="col-md-8 mt-4">
-        {% for post in object_list %}
+        {% for item in object_list %}
         <div class="card mb-4">
-          <h3 class="card-title mt-2 ml-3 mr-3 mb-0 p-2 font-weight-bold">{{post.title}}</h3>
+          <h3 class="card-title mt-2 ml-3 mr-3 mb-0 p-2 font-weight-bold">{{item.title}}</h3>
           <hr>
 
-          {% if post.image %}
-          <a href="{% url 'blog:post-detail' post.slug  %}"><img class="card-img-top" src="{{ post.image.url }}" alt="Card image cap" style="height: 500px;"></a>
+          {% if item.image %}
+          <a href="{% url 'blog:post-detail' item.slug  %}"><img class="card-img-top" src="{{ item.image.url }}" alt="Card image cap" style="height: 500px;"></a>
           <hr>
           {% endif %}
           <div class="card-body">
-            &nbsp; &nbsp;<p class="card-text">{{ post.content|slice:":200" }}</p>
-            <a href="{% url 'blog:post-detail' post.slug  %}" class="btn btn-primary">Read More &rarr;</a>
+            &nbsp; &nbsp;<p class="card-text">{{ item.content|slice:":200" }}</p>
+            <a href="{% url 'blog:post-detail' item.slug  %}" class="btn btn-primary">Read More &rarr;</a>
           </div>
           <div class="card-footer text-muted">
-            Posted on {{post.created_on}} by
-            <a href="{% url 'profile' post.author.username %}">{{post.author}}</a>
+            Posted on {{item.created_on}} by
+            <a href="{% url 'profile' item.author.username %}">{{item.author}}</a>
           </div>
         </div>
+        {% empty %}
+            <p class="lead text-white text-center bg-dark">No blogs found.</p>
         {% endfor %}
-        {% if is_paginated %}
-          <nav class="d-flex justify-content-center wow fadeIn">
-            <ul class="pagination pg-blue">
-    
-              {% if page_obj.has_previous %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.previous_page_number }}" aria-label="Previous">
-                  <span aria-hidden="true">&laquo;</span>
-                  <span class="sr-only">Previous</span>
-                </a>
-              </li>
-              {% endif %}
-    
-    
-              <li class="page-item active">
-                <a class="page-link" href="?page={{ page_obj.number }}">{{ page_obj.number }}
-                  <span class="sr-only">(current)</span>
-                </a>
-              </li>
-    
-              {% if page_obj.has_next %}
-              <li class="page-item">
-                <a class="page-link" href="?page={{ page_obj.next_page_number }}" aria-label="Next">
-                  <span aria-hidden="true">&raquo;</span>
-                  <span class="sr-only">Next</span>
-                </a>
-              </li>
-              {% endif %}
-            </ul>
-          </nav>
-        {% endif %}
+
       </div>
-      
 
       <!-- Sidebar Widgets Column -->
       <div class="col-md-4">
@@ -86,10 +57,7 @@
               <div class="col-lg-6">
                 <ul class="list-unstyled mb-0">
                   <li>
-                    <form action="{% url 'blog:search'%}" method="GET">
-                      <a href="" name="q">Love</a>
-                    </form>
-                    
+                    <a href="#">Love</a>
                   </li>
                   <li>
                     <a href="#">Business</a>
@@ -147,7 +115,7 @@
         <div class="card my-4">
           <h5 class="card-header">Updates</h5>
           <div class="card-body">
-            Chat Functionality comming soon...
+            No updates!
           </div>
         </div>
 

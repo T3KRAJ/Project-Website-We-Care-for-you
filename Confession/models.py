@@ -24,7 +24,7 @@ CATEGORY = (
 )
 
 class ConfessionPost(models.Model):
-    title = models.CharField(max_length=200)
+    title = models.CharField(max_length=80, null=True, blank=True)
     slug = models.SlugField(max_length=200, unique=True)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, related_name='confession_post')
     display_name = models.CharField(max_length=25, null=True, blank=True)
@@ -64,21 +64,3 @@ def get_unique_slug(sender, instance, **kwargs):
 
 pre_save.connect(get_unique_slug, sender=ConfessionPost)
 
-class Comment(models.Model):
-    post = models.ForeignKey(ConfessionPost, on_delete=models.CASCADE, related_name='comments')
-    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    body = models.TextField()
-    created = models.DateTimeField(auto_now_add=True)
-    updated = models.DateTimeField(auto_now=True)
-    active = models.BooleanField(default=True)
-    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
-
-    class Meta:
-        # sort comments in chronological order by default
-        ordering = ('created',)
-
-    def __str__(self):
-        return 'Comment by {}'.format(self.name)
-
-    def get_date(self):
-        return humanize.naturaltime(self.created_on)

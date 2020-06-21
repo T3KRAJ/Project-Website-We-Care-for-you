@@ -12,7 +12,6 @@ urlpatterns = [
     path('', include('Blog.urls', namespace = 'blog')),
     path('', include('Confession.urls', namespace = 'confession')),
     path('accounts/', include('allauth.urls')),
-    path('chat/', include('chatapp.urls'))
 
 ]
 if settings.DEBUG:

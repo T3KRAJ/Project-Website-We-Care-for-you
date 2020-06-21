@@ -18,7 +18,6 @@
                             <a class="dropdown-item" href="{% url 'confession:post-update' confessionpost.slug %}">Edit</a>
                             <a class="dropdown-item" href="{% url 'confession:post-delete' confessionpost.slug %}">Delete</a>
                             {% endif %}
-                            <a class="dropdown-item" href="#">Report</a>
                         </div>
                     </div>                    
                     <div><small>{{confessionpost.get_date}}</small></div>

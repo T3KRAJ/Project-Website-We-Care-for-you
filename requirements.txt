@@ -14,6 +14,7 @@ Django==3.0.6
 django-allauth==0.42.0
 django-crispy-forms==1.9.1
 django-rest-auth==0.9.5
+django-widget-tweaks==1.4.8
 djangorestframework==3.11.0
 hyperlink==19.0.0
 idna==2.9

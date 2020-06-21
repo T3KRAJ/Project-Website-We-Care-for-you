@@ -1,14 +1,45 @@
-{% load crispy_forms_tags %}
+{% extends 'base.html' %}
 
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group">
-                <legend class="border-bottom mb-4">Blog Post</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Post</button>
-            </div>
-        </form>
+{% load widget_tweaks %}
+{% load static %}
+{% block extra_head %}
+    <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
+{% endblock %}
+{% block content %}
+<div class="container">
+    <div class="card m-5 p-5 shadow p-3 mb-5 bg-white rounded">
+        <h4 class="card-header">Create a blog</h4>
+        <div class="cardbody m-4 p-2">
+            <form id="post_form" method="POST" action="" enctype="multipart/form-data">
+
+                {% csrf_token %}
+                {% for hidden in form.hidden_fields %}
+                    {{ hidden }}
+                {% endfor %}
+                <div class="form-group">
+                    <div class="form-group">
+                        <label for="exampleInputdisplayname">Title</label>
+                        {{ form.title|attr:"class:form-control"}}
+                    </div> 
+                    <div class="form-group">
+                        <label for="exampleInputdisplayname">Content</label>
+                        {{ form.content|attr:"class:form-control"}}
+                    </div> 
+                    <div class="form-group">
+                        <p class="lead">Category that best describes your blog.</p>
+                        <label for="exampleInputdisplayname">Category</label>
+                        {{ form.category|attr:"class:form-control"}}
+                    </div>                
+                    <div class="form-group">
+                        <p class="lead">Select an image</p>
+                        <label for="exampleInputdisplayname">Thumbnail</label>
+                        {{ form.image|attr:"class:form-control"}}
+                    </div>
+                    <input class="btn btn-success" type="submit" name="submit" value="Post" />
+                </div>
+                
+            </form>
+        </div>
     </div>
+</div>
+{% endblock %}
