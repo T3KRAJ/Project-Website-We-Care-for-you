@@ -71,16 +71,7 @@
                     <label for="reset_password"><a style="color: blue;" class="btn btn-default" href="{% url 'account_reset_password' %}">{% trans "Forgot Password?" %}</a></label>       
                 </div>
 
-                <br>
-                <center class="login-or">{% trans 'or' %}</center>
-                {% get_providers as socialaccount_providers %}
-                <div class="border-bottom socialaccount_ballot">
-                    <ul class="social-icon-one socialaccount_providers">
-                        <li class="twitter"><a href="{% provider_login_url 'twitter' %}"><span class="fa fa-twitter"></span></a></li>
-                        <!-- google and facebook -->
-                    </ul>
-                    
-                </div>
+
             </form>
         </div>
     </div>

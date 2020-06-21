@@ -14,7 +14,7 @@ class ConfessionPostList(ListView):
     template_name = 'confession/confessions.html'
     paginate_by = 10
 
-class CreateConfessionPost(LoginRequiredMixin, CreateView):
+class CreateConfessionPost( LoginRequiredMixin, CreateView):
     model = ConfessionPost
     fields = ['title', 'content', 'display_name', 'category']
     success_url = "/confessions/"
@@ -25,8 +25,6 @@ class CreateConfessionPost(LoginRequiredMixin, CreateView):
         return super().form_valid(form)
 
 
-# Detailview with comments
-@login_required
 def confessionpost_detail(request, slug):
     post = get_object_or_404(ConfessionPost, slug=slug)
     comments = post.comments.filter(active=True, parent__isnull=True)
