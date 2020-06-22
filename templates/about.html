@@ -1,34 +1,24 @@
+{% extends 'base.html' %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="author" content="">
-  <link rel="icon" type="image/png" href="{% static 'img/favicon-32x32.png' %}" sizes="32x32" />
-  <link rel="icon" type="image/png" href="{% static 'img/favicon-16x16.png' %}" sizes="16x16" />
   <title>ABOUT US</title>
-  <!--stylesheet-->
-  <link href="{% static 'https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900' %}" rel="stylesheet">
-  <link href="{% static 'https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css' %}" rel="stylesheet" type="text/css">
+  {% block extra_head %}
+  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
+  <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
+  <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
-  <link href="styles/custom-responsive-styles.css" rel="stylesheet" type="text/css">
-  <!--scripts-->
-  <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/all-plugins.js' %}"></script>
-  <script type="text/javascript" src="{% static 'js/plugins-activate.js' %}"></script>
-</head>
+  <link href="{% static 'css/custom-responsive-styles.css' %}" rel="stylesheet" type="text/css">
+  {% endblock %}
+
+{% block content %}
 
 <body id="page-top">
   <!-- Navigation -->
-  <div class="logo">
+  <div class="logo mt-4">
     <i class="" ><span>HUMANE</span></i>
   </div>
   
  
-  <!-- Header Starts -->
   <section id="Banner" class="content-section">
     <div class="container content-wrap text-center">
       <h1>MEET US</h1>
@@ -39,8 +29,8 @@
     </div>
     <div class="overlay"></div>
   </section>
-  <!-- Header Ends -->
-  <!-- About Us Starts -->
+
+
   <section id="About" class="content-section">
     <div class="container text-center">
       <div class="row">
@@ -48,11 +38,16 @@
           <div class="block-heading">
             <h2>About Us</h2>
           </div>
-          <p class="lead">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen bookLorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book</p>
+          <p class="lead">HUMANE(care.love.compassion)is a platform created with love all for you to show our gratitude towards this beautiful and yet amazing world. We're here just for you to help those who are going through anxiety and depression in their daily lives. 
+            With wisdom comes sharing emotions, words and actions and we're just right here for all of you.The words you choose are the words that matter and your confessions are here private, anonymous and secured.The major aim of this organization is to spread love and to bring a moment of compassion,
+            joy and happiness in the community because your confession is not a betrayal ;)
+            PEACE
+          </p>
         </div>
       </div>
     </div>
   </section>
+
   <!-- About Us Starts -->
   <section id="Services" class="content-section text-center">
     <div class="container">
@@ -71,7 +66,9 @@
             </div>
             <div class="service-content">
               <h3>FOUNDER AND CEO</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+              <p>C.S.E Grad,Founder of HUMANE,
+                A person with blithesome personality  and has an ineffable  attitude towards his work.
+              </p>
             </div>
           </div>
         </div>
@@ -80,12 +77,14 @@
             <div class="service-icon orange">
               <div class="front-content">
                 <i class=""></i>
-                <h3>TEAM MEMBER 2</h3>
+                <h3>Isha Arora</h3>
               </div>
             </div>
             <div class="service-content">
-              <h3>DESIGNATION</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+              <h3>Co-founder</h3>
+              <p>C.S.E Grad, Programmer in HUMANE,
+                She has been a fabulous and fortuitous lady in the team.She is a person of dynamic meditator to the team with her cheerful personality
+              </p>
             </div>
           </div>
         </div>
@@ -94,12 +93,14 @@
             <div class="service-icon red">
               <div class="front-content">
                 <i class="" aria-hidden="true"></i>
-                <h3>TEAM MEMBER 3</h3>
+                <h3>Tek Raj Joshi</h3>
               </div>
             </div>
             <div class="service-content">
-              <h3>DESIGNATION</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+              <h3>Technical head</h3>
+              <p>C.S.E Grad, Developer in HUMANE,
+                He has been the most creative and considerate side of the team. By focussing on the major and minor aspects of his work he has made an exuberant asset to the team.
+              </p>
             </div>
           </div>
         </div>
@@ -108,146 +109,219 @@
             <div class="service-icon grey">
               <div class="front-content">
                 <i class=""></i>
-                <h3>TEAM MEMBER 4</h3>
+                <h3>Tinu</h3>
               </div>
             </div>
             <div class="service-content">
-              <h3>DESIGNATION</h3>
-              <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text</p>
+              <h3>Tech advisior</h3>
+              <p>C.S.E Grad, Developer in HUMANE,
+                He is a remarkable guy in a field of tech and upholds specific recommendation in the fileds of Networking.
+              </p>
             </div>
           </div>
         </div>
       </div>
     </div>
   </section>
-  <section class="content-section text-center" id="Portfolio">
+  <!-- <section class="content-section text-center" id="Portfolio">
     <div class="container">
       <div class="block-heading">
         <h2>GALLERY</h2>
-        <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+        <p>Our hard working team members</p>
       </div>
       <div class="portfolio-wrapper clearfix">
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-two.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-two.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-two.jpeg">
+            <img class="content-image" src="{% static 'img/p-two.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad,Developer in HUMANE,
+He's been a consistent in his field of work and has a strong and resilient attitude towards life.(sanjay)</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-three.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-three.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-three.jpeg">
+            <img class="content-image" src="{% static 'img/p-three.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+A person with tremendous indefatigable personality and has been the stellar joint to the team
+(kirti)</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-four.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-four.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-four.jpeg">
+            <img class="content-image" src="{% static 'img/p-four.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is a tenacious and calculative person.With his methodical and assertive knowledge he has made a some excellent success in his field of work.(pankaj)
+</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-five.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-five.jpeg">
+            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
+</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-six.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-six.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-six.jpeg">
+            <img class="content-image" src="{% static 'img/p-six.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is emphatatic person and has been the ultimate motivated person of the team with his indomitable work(sourav)
+</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="images/p-three.jpeg">
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-three.jpeg' %}">
           <div class="content hover-cont-wrap">
             <div class="content-overlay"></div>
-            <img class="content-image" src="images/p-three.jpeg">
+            <img class="content-image" src="{% static 'img/p-three.jpeg' %}">
             <div class="content-details fadeIn-bottom">
               <h5 class="p-title">Title</h5>
-              <p class="p-desc">Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is person of caring and compassionate nature with his excellent analytical abilities is huge asset to the team(shreyans)
+</p>
+              <span class="zoom"><i class="fa fa-search-plus"></i></span>
+            </div>
+          </div>
+        </a>
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
+          <div class="content hover-cont-wrap">
+            <div class="content-overlay"></div>
+            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
+            <div class="content-details fadeIn-bottom">
+              <h5 class="p-title">Title</h5>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
+</p>              <span class="zoom"><i class="fa fa-search-plus"></i></span>
+            </div>
+          </div>
+        </a>
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
+          <div class="content hover-cont-wrap">
+            <div class="content-overlay"></div>
+            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
+            <div class="content-details fadeIn-bottom">
+              <h5 class="p-title">Title</h5>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
+</p>              <span class="zoom"><i class="fa fa-search-plus"></i></span>
+            </div>
+          </div>
+        </a>
+        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
+          <div class="content hover-cont-wrap">
+            <div class="content-overlay"></div>
+            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
+            <div class="content-details fadeIn-bottom">
+              <h5 class="p-title">Title</h5>
+              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
+He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
+</p>
               <span class="zoom"><i class="fa fa-search-plus"></i></span>
             </div>
           </div>
         </a>
       </div>
     </div>
-  </section
-  <!-- TESTIMONIALS -->
+  </section> -->
   <section id="Testimonials" class="content-section">
     <div class="container">
       <div class="row">
         <div class="col-sm-12">
           <div class="block-heading">
             <h2>OTHER TEAM MEMBERS</h2>
-            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+            <p>Our other hard working team members.</p>
           </div>
           <div id="customers-testimonials" class="owl-carousel">
             <div class="item">
               <div class="shadow-effect">
-                <img class="img-circle" src="{% static 'img/sarah.jpg' %}" alt="">
-                <p>Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s</p>
+                <img class="img-circle" src="{% static 'img/sarah.jpg' %}" alt="pic">
+                <p>C.S.E Grad,Developer in HUMANE,
+A person with tremendous indefatigable personality and has been the stellar joint to the team</p>
               </div>
-              <div class="testimonial-name">Sarah Jenks</div>
+              <div class="testimonial-name">Kirti Chouhan</div>
             </div>
             <div class="item">
               <div class="shadow-effect">
-                <img class="img-circle" src="{% static 'img/tangelia.jpg' %}" alt="">
-                <p>Contrary to popular belief, Lorem Ipsum is not simply random text. It has roots in a piece of classical Latin literature from 45 BC, making it over 2000 years old</p>
+                <img class="img-circle" src="{% static 'img/john-doe.jpg' %}" alt="pic">
+                <p>C.S.E Grad,Developer in HUMANE,
+He's been a consistent in his field of work and has a strong and resilient attitude towards life.</p>
               </div>
-              <div class="testimonial-name">Tangelia Ekhoff</div>
+              <div class="testimonial-name">Sanjay</div>
             </div>
             <div class="item">
               <div class="shadow-effect">
-                <img class="img-circle" src="{% static 'img/john-doe.jpg' %}" alt="">
-                <p>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </p>
+                <img class="img-circle" src="{% static 'img/john-doe.jpg' %}" alt="pic">
+                <p>C.S.E Grad, Developer in HUMANE,
+He is a tenacious and calculative person.With his methodical and assertive knowledge he has made a some excellent success in his field of work. </p>
               </div>
-              <div class="testimonial-name">John Doe</div>
+              <div class="testimonial-name">Pankaj</div>
             </div>
             <div class="item">
               <div class="shadow-effect">
-                <img class="img-circle" src="{% static 'img/amy.jpg' %}" alt="">
-                <p>All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet. It uses a dictionary of over 200 Latin words</p>
+                <img class="img-circle" src="{% static 'img/daniel.jpg' %}" alt="pic">
+                <p>C.S.E Grad, Developer in HUMANE,
+He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly. </p>
               </div>
-              <div class="testimonial-name">Amy Tan</div>
+              <div class="testimonial-name">Mayank</div>
             </div>
             <div class="item">
               <div class="shadow-effect">
-                <img class="img-circle" src="{% static 'img/daniel.jpg' %}" alt="">
-                <p>Many desktop publishing packages and web page editors now use Lorem Ipsum as their default model text, and a search for 'lorem ipsum' will uncover many web sites still in their infancy.</p>
+                <img class="img-circle" src="{% static 'img/daniel.jpg' %}" alt="pic">
+                <p>C.S.E Grad, Developer in HUMANE,
+                  He is emphatatic person and has been the ultimate motivated person of the team with his indomitable work.
+                </p>
               </div>
-              <div class="testimonial-name">Daniel Felsted</div>
+              <div class="testimonial-name">shreyans</div>
+            </div>
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="{% static 'img/daniel.jpg' %}" alt="pic">
+                <p>C.S.E Grad, Developer in HUMANE,
+                  He is person of caring and compassionate nature with his excellent analytical abilities is huge asset to the team
+                </p>
+              </div>
+              <div class="testimonial-name">Ramneek</div>
+            </div>
+            <div class="item">
+              <div class="shadow-effect">
+                <img class="img-circle" src="{% static 'img/daniel.jpg' %}" alt="pic">
+                <p>C.S.E Grad, Developer in HUMANE,
+                  He is the person who's been generous and gregarious to the team.He has an excellent knowledge of amiable and discreet towards all adventive work in the team.
+                </p>
+              </div>
+              <div class="testimonial-name">Shubham</div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </section>
-  <!-- END OF TESTIMONIALS -->
-  
-</body>
-
-</html>
+{% endblock %}  
+  {% block extra_scripts %}
+    <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/all-plugins.js' %}"></script>
+    <script type="text/javascript" src="{% static 'js/plugins-activate.js' %}"></script>
+  {% endblock %}
