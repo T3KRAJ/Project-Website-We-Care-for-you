@@ -1,9 +1,7 @@
 {% extends 'base.html' %}
 {% load static %}
-  <title>ABOUT US</title>
+{% block head_title %}About Us{% endblock %}
   {% block extra_head %}
-  <link rel="icon" type="image/png" href="images/favicon-32x32.png" sizes="32x32" />
-  <link rel="icon" type="image/png" href="images/favicon-16x16.png" sizes="16x16" />
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,700,900" rel="stylesheet">
   <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" type="text/css">
   <link href="{% static 'css/styles.css' %}" rel="stylesheet" type="text/css">
@@ -13,12 +11,7 @@
 {% block content %}
 
 <body id="page-top">
-  <!-- Navigation -->
-  <div class="logo mt-4">
-    <i class="" ><span>HUMANE</span></i>
-  </div>
-  
- 
+   
   <section id="Banner" class="content-section">
     <div class="container content-wrap text-center">
       <h1>MEET US</h1>
@@ -123,130 +116,6 @@
       </div>
     </div>
   </section>
-  <!-- <section class="content-section text-center" id="Portfolio">
-    <div class="container">
-      <div class="block-heading">
-        <h2>GALLERY</h2>
-        <p>Our hard working team members</p>
-      </div>
-      <div class="portfolio-wrapper clearfix">
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-two.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-two.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad,Developer in HUMANE,
-He's been a consistent in his field of work and has a strong and resilient attitude towards life.(sanjay)</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-three.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-three.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-A person with tremendous indefatigable personality and has been the stellar joint to the team
-(kirti)</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-four.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-four.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is a tenacious and calculative person.With his methodical and assertive knowledge he has made a some excellent success in his field of work.(pankaj)
-</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
-</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-six.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-six.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is emphatatic person and has been the ultimate motivated person of the team with his indomitable work(sourav)
-</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-three.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-three.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is person of caring and compassionate nature with his excellent analytical abilities is huge asset to the team(shreyans)
-</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
-</p>              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
-</p>              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-        <a class="each-portfolio" data-fancybox="gallery" href="{% static 'img/p-five.jpeg' %}">
-          <div class="content hover-cont-wrap">
-            <div class="content-overlay"></div>
-            <img class="content-image" src="{% static 'img/p-five.jpeg' %}">
-            <div class="content-details fadeIn-bottom">
-              <h5 class="p-title">Title</h5>
-              <p class="p-desc">C.S.E Grad, Developer in HUMANE,
-He is a person with ambitious and amiable  thoughts and has a diligent way of doing his work perfectly.(mayank)
-</p>
-              <span class="zoom"><i class="fa fa-search-plus"></i></span>
-            </div>
-          </div>
-        </a>
-      </div>
-    </div>
-  </section> -->
   <section id="Testimonials" class="content-section">
     <div class="container">
       <div class="row">
@@ -319,6 +188,8 @@ He is a person with ambitious and amiable  thoughts and has a diligent way of do
         </div>
       </div>
     </div>
+  </section>
+</body>
 {% endblock %}  
   {% block extra_scripts %}
     <script type="text/javascript" src="{% static 'js/jquery-3.2.1.min.js' %}"></script>

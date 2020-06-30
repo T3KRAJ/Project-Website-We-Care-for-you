@@ -40,7 +40,7 @@ class ConfessionPost(models.Model):
 
     def __str__(self):
         return self.title
-    
+
     def get_date(self):
         return humanize.naturaltime(self.created_on)
 
@@ -64,3 +64,26 @@ def get_unique_slug(sender, instance, **kwargs):
 
 pre_save.connect(get_unique_slug, sender=ConfessionPost)
 
+class Comment(models.Model):
+    post = models.ForeignKey(ConfessionPost, on_delete=models.CASCADE, related_name='comments_on_confession')
+    name = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name='confession_user')
+    body = models.CharField(max_length=250)
+    created = models.DateTimeField(auto_now_add=True)
+    updated = models.DateTimeField(auto_now=True)
+    # manually deactivate inappropriate comments from admin site
+    active = models.BooleanField(default=True)
+    parent = models.ForeignKey('self', on_delete=models.CASCADE, null=True, blank=True, related_name='replies')
+
+    class Meta:
+        # sort comments in chronological order by default
+        ordering = ('created',)
+
+    def __str__(self):
+        return 'Comment by {}'.format(self.name)
+
+    def get_date(self):
+        return humanize.naturaltime(self.created)
+
+    @property
+    def total_comments(self):
+        return self.likes.count()

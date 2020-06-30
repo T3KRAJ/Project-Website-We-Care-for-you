@@ -71,7 +71,7 @@ def blogpost_detail(request, slug):
         comment_form = CommentForm()
     return render(request,
                   'blog/blogpost_detail.html',
-                  {'blogpost': post,
+                   {'blogpost': post,
                    'comments': comments,
                    'is_liked':is_liked,
                    'comment_form': comment_form})
@@ -80,6 +80,7 @@ class BPUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
     model = BlogPost
     fields = ['title', 'content', 'category', 'image']
     success_url = ""
+    template_name = 'blog/blogpost_form.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -95,6 +96,7 @@ class BPUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 class BPDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = BlogPost
     success_url = '/blogs/'
+    template_name = 'blog/blogpost_confirm_delete.html'
     def test_func(self):
         post = self.get_object()
         if self.request.user == post.author:

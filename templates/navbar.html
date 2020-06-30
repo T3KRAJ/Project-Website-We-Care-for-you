@@ -1,14 +1,17 @@
 {% load static %}
     <nav class="navbar navbar-expand-md navbar-dark bg-info">
         <div class="container">
-            <a  href="#"><img src="{% static 'img/pp.jpg' %}" alt="logo" class="rounded" style="width: 70px; height: 50px;"></a>
+            <a  href="#"><img src="{% static 'img/logo.jpg' %}" alt="logo" class="rounded" style="width: 220px; height: 50px;"></a>
             <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-            
+
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 &nbsp; &nbsp; &nbsp;
                 <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="{% url 'home' %}">Home</a>
+                    </li>
                     <li class="nav-item active">
                         <a class="nav-link" href="{% url 'about' %}">About</a>
                     </li>
@@ -23,14 +26,14 @@
                     {% if user.is_authenticated%}
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
-                        </li>	
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'profile' user %}">Account</a>
                         </li>
                     {% else %}
                         <li class="nav-item">
                             <a href="{% url 'account_login' %}" class="nav-link">Login</a>
-                        </li>	
+                        </li>
                     {% endif %}
                 </ul>
             </div>

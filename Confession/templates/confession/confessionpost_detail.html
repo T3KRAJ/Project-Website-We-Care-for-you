@@ -1,5 +1,8 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load widget_tweaks %}
+{% block head_title %}{{confessionpost.title}}{% endblock %}
+
 {% block extra_head %}
     <link rel="stylesheet" type="text/css" href="{% static 'css/profile.css' %}">
 {% endblock %}
@@ -12,22 +15,22 @@
                     <div class="dropdown show float-right">
                         <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <i class="fa fa-bars" aria-hidden="true"></i>
-                        </a>                      
-                        <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                            {% if request.user == confessionpost.author %}
-                            <a class="dropdown-item" href="{% url 'confession:post-update' confessionpost.slug %}">Edit</a>
-                            <a class="dropdown-item" href="{% url 'confession:post-delete' confessionpost.slug %}">Delete</a>
-                            {% endif %}
-                        </div>
-                    </div>                    
+                        </a>
+                        {% if request.user == confessionpost.author %}
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                <a class="dropdown-item" href="{% url 'confession:post-update' confessionpost.slug %}">Edit</a>
+                                <a class="dropdown-item" href="{% url 'confession:post-delete' confessionpost.slug %}">Delete</a>
+                            </div>
+                        {% endif %}
+                    </div>
                     <div><small>{{confessionpost.get_date}}</small></div>
                     {% if confessionpost.display_name %}
                         &nbsp &nbsp <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                         <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                     </svg> {{confessionpost.display_name}}
                     {% endif %}
-      
-                  </div> 
+
+                  </div>
                 <h2 class="display-4 font-italic">{{confessionpost.title}}</h2>
                 <p class="lead my-3 mr-3 ml-3">&nbsp;&nbsp;{{confessionpost.content}}</p>
                 <hr>
@@ -43,4 +46,48 @@
             </div>
         </div>
     </div>
-{% endblock %}   
+    <div class="container">
+        <div class="card bg-dark text-white  mt-2 mb-2 p-3">
+            <div class="cardbody">
+                {% for comment in comments %}
+                    <div>
+                        <p>
+                            <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                            </svg> {{ comment.name }} &nbsp; &nbsp;{{ comment.get_date }} &nbsp; &nbsp;  {{ comment.body|linebreaks }}
+                        </p>
+                        {% for reply in comment.replies.all %}
+                            <p><svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
+                              </svg>{{ reply.name }} &nbsp;&nbsp; {{ reply.get_date }}</p>
+                            <li>{{ reply.body }}</li>
+                        {% endfor %}
+
+                        <form action="." method="POST">
+                            {% csrf_token %}
+                            {{ comment_form.body }}
+                            <input class="btn btn-primary" type="submit" value="Reply">
+
+                            <!-- Hidden input for parent comment.id -->
+                            <input type="hidden" name="parent_id" value="{{ comment.id }}">
+                        </form>
+                        <hr>
+                    </div>
+                {% empty %}
+                <p>There are no comments yet.</p>
+                {% endfor %}
+                <p class="lead">Add a new comment</p>
+                <form action="" method="POST">
+                    {% csrf_token %}
+                        {{ comment_form.body|attr:"class:form-control commentform"|attr:"placeholder:New comment..." }}
+                     <div class="form-group">
+                   </div>
+
+                    <button class="btn btn-primary" type="submit">Add comment</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+{% endblock %}

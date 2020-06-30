@@ -1,5 +1,5 @@
 from django.contrib import admin
-from Confession.models import ConfessionPost
+from Confession.models import ConfessionPost, Comment
 
 class ConfessionPostAdmin(admin.ModelAdmin):
     list_display = ('title', 'slug', 'status','created_on')
@@ -9,6 +9,7 @@ class ConfessionPostAdmin(admin.ModelAdmin):
 
 admin.site.register(ConfessionPost, ConfessionPostAdmin)
 
+@admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
     list_display = ('name', 'body', 'post', 'created', 'active')
     list_filter = ('active', 'created')
