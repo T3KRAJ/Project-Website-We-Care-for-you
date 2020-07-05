@@ -26,7 +26,6 @@ CATEGORY = (
 class ConfessionPost(models.Model):
     title = models.CharField(max_length=80)
     slug = models.SlugField(max_length=200, unique=True)
-    author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete= models.CASCADE, related_name='confession_post')
     display_name = models.CharField(max_length=25, null=True, blank=True)
     content = models.TextField()
     category = models.CharField(choices = CATEGORY, max_length = 2)

@@ -12,17 +12,7 @@
             <div class="container">
                 <div class="category">
                     <button type="button float-left" class="btn btn-info">{{confessionpost.get_category_display}}</button>
-                    <div class="dropdown show float-right">
-                        <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <i class="fa fa-bars" aria-hidden="true"></i>
-                        </a>
-                        {% if request.user == confessionpost.author %}
-                            <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                <a class="dropdown-item" href="{% url 'confession:post-update' confessionpost.slug %}">Edit</a>
-                                <a class="dropdown-item" href="{% url 'confession:post-delete' confessionpost.slug %}">Delete</a>
-                            </div>
-                        {% endif %}
-                    </div>
+                    
                     <div><small>{{confessionpost.get_date}}</small></div>
                     {% if confessionpost.display_name %}
                         &nbsp &nbsp <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">

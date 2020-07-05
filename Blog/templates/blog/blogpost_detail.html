@@ -19,17 +19,19 @@
                         <svg class="bi bi-person-fill" width="1em" height="1em" viewBox="0 0 16 16" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
                             <path fill-rule="evenodd" d="M3 14s-1 0-1-1 1-4 6-4 6 3 6 4-1 1-1 1H3zm5-6a3 3 0 1 0 0-6 3 3 0 0 0 0 6z"/>
                         </svg> <a href="{% url 'profile' blogpost.author.username %}">{{blogpost.author.username}}</a>
+                        {% if request.user == blogpost.author %}
                         <div class="dropdown show float-right">
                             <a class="btn dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="fa fa-bars" aria-hidden="true"></i>
                             </a>                      
                             <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
-                                {% if request.user == blogpost.author %}
+                                
                                 <a class="dropdown-item" href="{% url 'blog:post-update' blogpost.slug %}">Edit</a>
                                 <a class="dropdown-item" href="{% url 'blog:post-delete' blogpost.slug %}">Delete</a>
-                                {% endif %}
+                                
                             </div>
-                        </div>                    
+                        </div>    
+                        {% endif %}                
                         <div><small>{{blogpost.get_date}}</small></div>                    
                     </div> 
                     <h2 class="display-4 font-italic">{{blogpost.title}}</h2>

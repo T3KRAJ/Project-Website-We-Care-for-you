@@ -15,7 +15,7 @@ class BlogPostList(ListView):
     paginate_by = 5
 
 
-
+@login_required
 def createBlogPost(request):
 
     if request.method == 'POST':      

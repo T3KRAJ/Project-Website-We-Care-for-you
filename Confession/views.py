@@ -15,7 +15,7 @@ class ConfessionPostList(ListView):
     template_name = 'confession/confessions.html'
     paginate_by = 10
 
-class CreateConfessionPost( LoginRequiredMixin, CreateView):
+class CreateConfessionPost( CreateView):
     model = ConfessionPost
     fields = ['title', 'content', 'display_name', 'category']
     success_url = "/confessions/"
@@ -23,7 +23,6 @@ class CreateConfessionPost( LoginRequiredMixin, CreateView):
 
 
     def form_valid(self, form):
-        form.instance.author = self.request.user
         form.instance.status = int(1)
         return super().form_valid(form)
 
@@ -68,31 +67,6 @@ def confessionpost_detail(request, slug):
                    'comment_form': comment_form
                    })
 
-class CPUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
-    model = ConfessionPost
-    fields = ['title', 'content', 'display_name']
-    success_url = ''
-    template_name = 'confession/confessionpost_form.html'
-    def form_valid(self, form):
-        form.instance.author = self.request.user
-        return super().form_valid(form)
-
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author or post.display_name:
-            return True
-        return False
-
-
-class CPDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
-    model = ConfessionPost
-    success_url = '/confessions/'
-    template_name = 'confession/confessionpost_confirm_delete.html'
-    def test_func(self):
-        post = self.get_object()
-        if self.request.user == post.author or post.display_name:
-            return True
-        return False
 
 @login_required
 def like_confessionpost(request):
